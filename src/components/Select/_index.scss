@@ -17,13 +17,18 @@
     font-family: inherit;
     font-weight: 300;
     cursor: pointer;
+
+    &::placeholder {
+      color: inherit;
+      opacity: 1;
+    }
   }
 
   &::after {
     content: '';
     position: absolute;
     width: 7px;
-    height: 4px;
+    height: 5px;
     background: url('../../assets/images/arrow.svg') no-repeat;
     right: 20px;
     top: calc(50% - 12px);

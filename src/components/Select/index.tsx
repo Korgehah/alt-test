@@ -1,17 +1,31 @@
+import { useState } from 'react';
+
 interface SelectProps {
   placeholder: string;
+  selectItems?: { id: string; name: string }[];
 }
 
-const Select = ({ placeholder }: SelectProps) => {
+const Select = ({ placeholder, selectItems }: SelectProps) => {
+  const [selectValue, setSelectValue] = useState('');
+
   return (
     <div className='select'>
-      <input className='select__inner' placeholder={placeholder} />
+      <input
+        className='select__inner'
+        placeholder={placeholder}
+        defaultValue={selectValue}
+        readOnly
+      />
       <div className='select__menu'>
-        <span className='select__option'>1</span>
-        <span className='select__option'>2</span>
-        <span className='select__option'>3</span>
-        <span className='select__option'>4</span>
-        <span className='select__option'>5</span>
+        {selectItems?.map((item) => (
+          <span
+            className='select__option'
+            key={item.id}
+            onClick={() => setSelectValue(item.name)}
+          >
+            {item.name}
+          </span>
+        ))}
       </div>
     </div>
   );
