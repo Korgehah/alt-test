@@ -1,0 +1,36 @@
+.input {
+  position: relative;
+  margin: 0 0 20px;
+
+  &__inner {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 45px 0 20px;
+    height: 56px;
+    width: 100%;
+    border: 1px solid #f4f4f6;
+    border-radius: 5px;
+    outline: none;
+    background-color: #f8f9f9;
+    color: #4e556a;
+    font-size: 15px;
+    font-family: inherit;
+    font-weight: 300;
+  }
+
+  &__inner:focus ~ &__label {
+    font-size: 10px;
+    left: 15px;
+    top: 20%;
+  }
+
+  &__label {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: 0.3s ease-in-out;
+  }
+}

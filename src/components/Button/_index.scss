@@ -1,0 +1,12 @@
+.button {
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+
+  &-container {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
