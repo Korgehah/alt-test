@@ -35,4 +35,4 @@ const Checkbox = ({ children, smallText }: CheckboxProps) => {
     </label>
   );
 };
-export default Checkbox;
+export { Checkbox };

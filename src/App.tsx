@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 /* styles */
 import './assets/scss/index.scss';
@@ -6,11 +7,8 @@ import './assets/scss/index.scss';
 import { Button } from './components/Button';
 import { Input } from './components/Input';
 import { Select } from './components/Select';
-/* images */
-import Checkbox from './components/Checkbox';
-
-import axios from 'axios';
 import { Header } from './components/Header';
+import { Checkbox } from './components/Checkbox';
 
 interface FormProps {
   categories: { id: string; name: string }[];
@@ -143,4 +141,4 @@ const App = () => {
   );
 };
 
-export default App;
+export { App };
