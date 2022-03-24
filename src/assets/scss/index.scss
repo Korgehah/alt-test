@@ -2,3 +2,146 @@
 @import './core/variables';
 /* components */
 @import './components/index';
+
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.wrapper {
+  width: 1110px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.header {
+  padding: 18px 0;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: #f4f4f6;
+  }
+
+  &__menu {
+    display: flex;
+  }
+
+  &__button {
+    display: flex;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0071b8;
+    padding: 10px;
+
+    &-icon {
+      margin-left: 4px;
+    }
+  }
+
+  &__switcher {
+    display: flex;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 600;
+    padding: 10px;
+    align-items: center;
+
+    &-flag {
+      margin-right: 4px;
+    }
+    &-arrow {
+      margin-left: 1px;
+    }
+  }
+}
+
+.main {
+  padding: 62px 0 70px;
+
+  &__wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title,
+  &__subtitle {
+    margin: 0;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 36px;
+    margin: 0 0 28px;
+    font-weight: 500;
+    color: #222b45;
+  }
+
+  &__subtitle {
+    font-size: 15px;
+    margin: 0 0 50px;
+    font-weight: 400;
+    color: #646b7d;
+    line-height: 22px;
+    max-width: 521px;
+  }
+}
+
+.form {
+  width: 100%;
+  max-width: 730px;
+  box-shadow: 0px 0px 10px black;
+  border-radius: 10px;
+
+  &__head {
+    display: block;
+    background-color: #338dc6;
+    padding: 24px 0;
+    color: #ffffff;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    border-radius: 10px 10px 0 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    padding: 22px 45px 45px;
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 14px;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 33px;
+  }
+
+  &__short-inputs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+  }
+}
