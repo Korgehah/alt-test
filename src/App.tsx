@@ -9,6 +9,7 @@ import { Input } from './components/Input';
 import { Select } from './components/Select';
 import { Header } from './components/Header';
 import { Checkbox } from './components/Checkbox';
+import { Footer } from './components/Footer';
 
 interface FormProps {
   categories: { id: string; name: string }[];
@@ -76,14 +77,6 @@ const Form = ({ categories, countries, languages }: FormProps) => {
         </div>
       </div>
     </form>
-  );
-};
-
-const Footer = () => {
-  return (
-    <div>
-      <div></div>
-    </div>
   );
 };
 
