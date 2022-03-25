@@ -2,12 +2,17 @@
   padding: 18px 0;
   position: relative;
 
+  &__wrapper {
+    align-items: center;
+  }
+
   &::after {
     content: '';
     position: absolute;
     width: 100%;
     height: 1px;
     background-color: #f4f4f6;
+    bottom: 0;
   }
 
   &__menu {
