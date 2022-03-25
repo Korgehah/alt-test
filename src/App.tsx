@@ -43,6 +43,12 @@ const Form = ({
   const [isDisabled, setIsDisabled] = useState<boolean[]>([false, false]);
   const [flag, setFlag] = useState(true);
 
+  const countryCodes: string[] = [];
+  const industryCodes: string[] = [];
+  const userCountryCodes: string[] = [];
+  const userCategoryCodes: string[] = [];
+  const langCodes: string[] = [];
+
   const onSubmit = (data: any) => {
     const getCodes = (
       array: { name: string; id: string }[],
@@ -56,27 +62,18 @@ const Form = ({
       });
     };
 
-    const countryCodes: string[] = [];
-    const industryCodes: string[] = [];
-    const userCountryCodes: string[] = [];
-    const userCategoryCodes: string[] = [];
-    const langCodes: string[] = [];
-    const genderCodes: string[] = [];
-
     getCodes(countries, data.country, countryCodes);
     getCodes(industries, data.industry, industryCodes);
-    getCodes(categories, data.userCategory, userCategoryCodes);
-    getCodes(countries, data.userCountry, userCountryCodes);
+    getCodes(categories, data.user_category, userCategoryCodes);
+    getCodes(countries, data.user_country, userCountryCodes);
     getCodes(languages, data.lang, langCodes);
 
     const dataToSend = { ...data };
     dataToSend.country = countryCodes;
     dataToSend.industry = industryCodes;
-    dataToSend.userCategory = userCategoryCodes.join();
-    dataToSend.userCountry = userCountryCodes.join();
+    dataToSend.user_category = userCategoryCodes.join();
+    dataToSend.user_country = userCountryCodes.join();
     dataToSend.lang = langCodes.join();
-
-    console.log(dataToSend);
 
     const sendForm = () => {
       axios
@@ -105,7 +102,7 @@ const Form = ({
             register={register}
             errors={errors}
             required
-            name='companyName'
+            name='company_name'
             validationType='company'
             errorText='Введите имя компании'
           />
@@ -115,7 +112,7 @@ const Form = ({
               selectItems={categories}
               register={register}
               required
-              name='userCategory'
+              name='user_category'
               errors={errors}
               setValue={setValue}
             />
@@ -124,7 +121,7 @@ const Form = ({
               selectItems={countries}
               register={register}
               required
-              name='userCountry'
+              name='user_country'
               errors={errors}
               setValue={setValue}
             />
