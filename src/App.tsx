@@ -55,7 +55,7 @@ const Form = ({
       codesFor: string | string[],
       arrayWithCodes: string[]
     ) => {
-      array.filter((item) => {
+      array.forEach((item) => {
         if (codesFor.includes(item.name)) {
           arrayWithCodes.push(item.id);
         }
@@ -231,11 +231,11 @@ const Form = ({
             position={2}
           >
             Нажимая кнопку “Запросить демо-доступ” Вы принимаете{' '}
-            <a className='checkbox__inner-link' href='#'>
+            <a className='checkbox__inner-link' href='##'>
               пользовательское соглашение
             </a>{' '}
             и подтверждаете согласие с{' '}
-            <a className='checkbox__inner-link' href='#'>
+            <a className='checkbox__inner-link' href='##'>
               правилами использования и обработки персональных данных
             </a>
           </Checkbox>
