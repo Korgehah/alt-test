@@ -50,4 +50,14 @@
     display: flex;
     padding: 10px;
   }
+
+  &.--disabled {
+    & .checkbox__inner::after {
+      border: 2px solid red;
+    }
+
+    & .checkbox__field:checked ~ .checkbox__inner::after {
+      background-color: red;
+    }
+  }
 }

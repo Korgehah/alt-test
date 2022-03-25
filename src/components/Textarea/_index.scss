@@ -1,0 +1,22 @@
+.textarea {
+  resize: none;
+  margin: 0;
+  padding: 20px 25px 25px 20px;
+  min-height: 105px;
+
+  &__label {
+    position: absolute;
+    left: 20px;
+    top: 28px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #4e556a;
+    font-weight: 300;
+    transition: 0.2s ease-in-out;
+
+    &.--active {
+      font-size: 10px;
+      top: 11px;
+    }
+  }
+}

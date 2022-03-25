@@ -12,6 +12,7 @@ import { Checkbox } from './components/Checkbox';
 import { Multiselect } from './components/Multiselect';
 import { useForm } from 'react-hook-form';
 import { Footer } from './components/Footer';
+import { Textarea } from './components/Textarea';
 
 interface FormProps {
   categories: { id: string; name: string }[];
@@ -34,6 +35,8 @@ const Form = ({
   errors,
   setValue,
 }: FormProps) => {
+  const [isDisabled, setIsDisabled] = useState<boolean[]>([false, false]);
+
   const onSubmit = (data: any) => {
     // const dataToSend = {
     //   ...data, user_country:
@@ -159,19 +162,27 @@ const Form = ({
             name='industry'
             setValue={setValue}
           />
-          <Input
+          <Textarea
             placeholder='Сообщение'
             register={register}
-            errors={errors}
             name='message'
           />
         </div>
-        <Checkbox>
+        <Checkbox
+          isDisabled={isDisabled}
+          setIsDisabled={setIsDisabled}
+          position={1}
+        >
           Подтверждаю, что являюсь уполномоченным представителем указанного
           юридического лица или индивидуального предпринимателя
         </Checkbox>
         <div className='form__button-section'>
-          <Checkbox smallText>
+          <Checkbox
+            smallText
+            isDisabled={isDisabled}
+            setIsDisabled={setIsDisabled}
+            position={2}
+          >
             Нажимая кнопку “Запросить демо-доступ” Вы принимаете{' '}
             <a className='checkbox__inner-link' href='#'>
               пользовательское соглашение
@@ -181,7 +192,12 @@ const Form = ({
               правилами использования и обработки персональных данных
             </a>
           </Checkbox>
-          <button className='button-container form__button-container'>
+          <button
+            className={`button-container form__button-container ${
+              isDisabled.includes(false) ? '--disabled' : ''
+            }`}
+            disabled={isDisabled.includes(false)}
+          >
             <Button className='form__button'>Запросить демо-доступ</Button>
           </button>
         </div>

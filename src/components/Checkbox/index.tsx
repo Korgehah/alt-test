@@ -4,11 +4,32 @@ interface CheckboxProps {
   children: React.ReactNode;
   smallText?: boolean;
   inMultiselect?: boolean;
+  isDisabled?: boolean[];
+  setIsDisabled?: Function;
+  position?: number;
 }
 
-const Checkbox = ({ children, smallText, inMultiselect }: CheckboxProps) => {
+const Checkbox = ({
+  children,
+  smallText,
+  inMultiselect,
+  isDisabled,
+  setIsDisabled,
+  position,
+}: CheckboxProps) => {
   return (
-    <label className={`checkbox ${inMultiselect ? 'checkbox_big' : ''}`}>
+    <label
+      className={`checkbox ${inMultiselect ? 'checkbox_big' : ''} ${
+        isDisabled?.includes(false) ? '--disabled' : ''
+      }`}
+      onChange={() => {
+        const newState: boolean[] | undefined = isDisabled?.slice();
+        if (isDisabled && position && setIsDisabled && newState) {
+          newState[position - 1] = !isDisabled[position - 1];
+          setIsDisabled(newState);
+        }
+      }}
+    >
       <input className='checkbox__field' type='checkbox' />
       <span
         className={`checkbox__inner ${

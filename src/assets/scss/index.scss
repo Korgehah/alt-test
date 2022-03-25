@@ -128,6 +128,16 @@ a {
       padding: 0;
       transition: background-color 0.3s ease-in-out;
 
+      &.--disabled {
+        background-color: #74767a;
+        color: #ffffff;
+        cursor: default;
+
+        &:hover {
+          background-color: #74767a;
+        }
+      }
+
       &:hover {
         background-color: #338dc6;
       }
