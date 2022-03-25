@@ -17,15 +17,14 @@
     font-size: 15px;
     font-family: inherit;
     font-weight: 300;
-  }
 
-  &__inner:focus {
-    outline: 1px solid #338dc6;
-  }
+    &:focus {
+      outline: 1px solid #338dc6;
+    }
 
-  &__inner:focus ~ &__label {
-    font-size: 10px;
-    top: 20%;
+    &.--error {
+      outline: 2px solid red;
+    }
   }
 
   &__label {
@@ -36,6 +35,15 @@
     pointer-events: none;
     color: #4e556a;
     font-weight: 300;
-    transition: 0.3s ease-in-out;
+    transition: 0.2s ease-in-out;
+
+    &.--active {
+      font-size: 10px;
+      top: 20%;
+    }
+
+    &.--error {
+      color: red;
+    }
   }
 }

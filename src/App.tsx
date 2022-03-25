@@ -9,52 +9,151 @@ import { Input } from './components/Input';
 import { Select } from './components/Select';
 import { Header } from './components/Header';
 import { Checkbox } from './components/Checkbox';
+import { Multiselect } from './components/Multiselect';
+import { useForm } from 'react-hook-form';
 import { Footer } from './components/Footer';
 
 interface FormProps {
   categories: { id: string; name: string }[];
   countries: { id: string; name: string }[];
   languages: { id: string; name: string }[];
+  industries: { id: string; name: string }[];
+  register: Function;
+  handleSubmit: Function;
+  errors: { [x: string]: any };
 }
 
-const Form = ({ categories, countries, languages }: FormProps) => {
+const Form = ({
+  categories,
+  countries,
+  languages,
+  industries,
+  register,
+  handleSubmit,
+  errors,
+}: FormProps) => {
+  const onSubmit = (data: string[]) => {
+    console.log(data);
+  };
+
   return (
-    <form className='form'>
+    <form className='form' noValidate onSubmit={handleSubmit(onSubmit)}>
       <span className='form__head'>Заполните заявку</span>
       <div className='form__content'>
         <div className='form__section'>
           <div className='form__title'>Юридическое лицо</div>
-          <Input placeholder={'Название юридического лица*'} />
+          <Input
+            placeholder='Название юридического лица*'
+            register={register}
+            errors={errors}
+            required
+            name='company_name'
+            validationType='company'
+            errorText='Введите имя компании'
+          />
           <div className='form__short-inputs'>
-            <Select placeholder='Категория*' selectItems={categories} />
-            <Select placeholder='Страна*' selectItems={countries} />
+            <Select
+              placeholder='Категория*'
+              selectItems={categories}
+              register={register}
+              required
+              name='user_category'
+              errors={errors}
+            />
+            <Select
+              placeholder='Страна*'
+              selectItems={countries}
+              register={register}
+              required
+              name='user_country'
+              errors={errors}
+            />
           </div>
         </div>
         <div className='form__section'>
           <div className='form__title'>Представитель юридического лица</div>
           <div className='form__short-inputs'>
-            <Input placeholder='Имя*' />
-            <Input placeholder='Фамилия*' />
+            <Input
+              placeholder='Имя*'
+              register={register}
+              errors={errors}
+              required
+              name='name'
+              validationType='name'
+              errorText='Введите ваше имя'
+            />
+            <Input
+              placeholder='Фамилия*'
+              register={register}
+              errors={errors}
+              required
+              name='surname'
+              validationType='name'
+              errorText='Введите вашу фамилию'
+            />
             <Select
               placeholder='Обращение*'
               selectItems={[
                 { id: '1', name: 'мужчина' },
                 { id: '2', name: 'женщина' },
               ]}
+              register={register}
+              required
+              name='gender'
+              errors={errors}
             />
             <Select
               placeholder='Предпочтительный язык*'
               selectItems={languages}
+              register={register}
+              required
+              name='lang'
+              errors={errors}
             />
-            <Input placeholder='Должность*' />
-            <Input placeholder='Ваш корпоративный e-mail*' />
+            <Input
+              placeholder='Должность*'
+              register={register}
+              errors={errors}
+              required
+              name='position'
+              validationType='position'
+              errorText='Введите должность'
+            />
+            <Input
+              placeholder='Ваш корпоративный e-mail*'
+              register={register}
+              errors={errors}
+              required
+              name='corporate_email'
+              errorText='Введите корректный e-mail'
+              validationType='email'
+            />
           </div>
         </div>
         <div className='form__section'>
           <div className='form__title'>Профессиональные интересы</div>
-          <Input placeholder='Целевые рынки*' />
-          <Input placeholder='Интересующие отрасли*' />
-          <Input placeholder='Сообщение' />
+          <Multiselect
+            MultiselectItems={countries}
+            placeholder='Целевые рынки*'
+            required
+            register={register}
+            errors={errors}
+            name='country'
+          />
+          <Multiselect
+            placeholder='Интересующие отрасли*'
+            MultiselectItems={industries}
+            required
+            register={register}
+            errors={errors}
+            name='industry'
+          />
+          <Input
+            placeholder='Сообщение'
+            register={register}
+            errors={errors}
+            name='message'
+          />
         </div>
         <Checkbox>
           Подтверждаю, что являюсь уполномоченным представителем указанного
@@ -84,6 +183,16 @@ const App = () => {
   const [categories, setCategories] = useState<[]>([]);
   const [countries, setCountries] = useState<[]>([]);
   const [languages, setLanguages] = useState<[]>([]);
+  const [industries, setIndustries] = useState<[]>([]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: 'onChange',
+  });
+
   const url = 'https://export.alt-test.ru';
 
   const getAllCategories = () => {
@@ -106,10 +215,17 @@ const App = () => {
     });
   };
 
+  const getAllIndustries = () => {
+    axios.get(`${url}/api/v1/public/industry/input_list`).then((response) => {
+      setIndustries(response.data.data);
+    });
+  };
+
   useEffect(() => {
     getAllCategories();
     getAllCountries();
     getAllLanguages();
+    getAllIndustries();
   }, []);
 
   return (
@@ -126,6 +242,10 @@ const App = () => {
             categories={categories}
             countries={countries}
             languages={languages}
+            industries={industries}
+            register={register}
+            handleSubmit={handleSubmit}
+            errors={errors}
           />
         </div>
       </main>
@@ -134,4 +254,4 @@ const App = () => {
   );
 };
 
-export { App };
+export default App;

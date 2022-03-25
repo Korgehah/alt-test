@@ -1,9 +1,25 @@
-.input {
+.multiselect {
   position: relative;
-  margin: 0 0 20px;
+
+  &__option {
+    &:hover {
+      background-color: #f4f4f6;
+      color: #338dc6;
+    }
+  }
+
+  &__button {
+    color: #ffffff;
+    padding: 10px;
+
+    &-container {
+      background-color: #0071b8;
+      border-radius: 5px;
+    }
+  }
 
   &__inner {
-    margin: 0;
+    margin: 0 0 20px;
     display: flex;
     align-items: center;
     padding: 0 45px 0 20px;
@@ -17,20 +33,59 @@
     font-size: 15px;
     font-family: inherit;
     font-weight: 300;
+    cursor: pointer;
+
+    &::placeholder {
+      color: inherit;
+      opacity: 1;
+    }
+
+    &:focus {
+      outline: 1px solid #338dc6;
+    }
+
+    &.--error {
+      outline: 2px solid red;
+
+      &::placeholder {
+        color: red;
+        opacity: 1;
+      }
+    }
   }
 
-  &__inner:focus ~ &__label {
-    font-size: 10px;
-    left: 15px;
-    top: 20%;
-  }
-
-  &__label {
+  &::after {
+    content: '';
     position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    transition: 0.3s ease-in-out;
+    width: 7px;
+    height: 5px;
+    background: url('../../assets/images/arrow.svg') no-repeat;
+    right: 20px;
+    top: calc(50% - 12px);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &__menu {
+    display: flex;
+    overflow: scroll;
+    flex-direction: column;
+    box-shadow: 0 0 3px black;
+    cursor: pointer;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    z-index: 3;
+    border-radius: 10px;
+    padding: 0 10px;
+    max-height: 0;
+    transition: 0.15s linear;
+
+    &.--open {
+      max-height: 360px;
+      padding: 10px 10px;
+    }
   }
 }

@@ -3,11 +3,12 @@ import React from 'react';
 interface CheckboxProps {
   children: React.ReactNode;
   smallText?: boolean;
+  inMultiselect?: boolean;
 }
 
-const Checkbox = ({ children, smallText }: CheckboxProps) => {
+const Checkbox = ({ children, smallText, inMultiselect }: CheckboxProps) => {
   return (
-    <label className='checkbox'>
+    <label className={`checkbox ${inMultiselect ? 'checkbox_big' : ''}`}>
       <input className='checkbox__field' type='checkbox' />
       <span
         className={`checkbox__inner ${
