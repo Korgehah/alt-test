@@ -1,5 +1,3 @@
-/* variables */
-@import './core/variables';
 /* components */
 @import './components/index';
 /* fonts */
@@ -106,9 +104,20 @@ a {
     padding: 0 32px;
 
     &-section {
+      position: relative;
       font-size: 12px;
       display: flex;
       margin: 81px 0 0;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -50px;
+        left: -45px;
+        width: calc(100% + 90px);
+        height: 1px;
+        background-color: #f4f4f6;
+      }
     }
 
     &-container {
@@ -117,6 +126,11 @@ a {
       width: 240px;
       height: 55px;
       padding: 0;
+      transition: background-color 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #338dc6;
+      }
     }
   }
 }
