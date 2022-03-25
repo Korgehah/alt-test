@@ -9,6 +9,7 @@ interface MultiselectProps {
   register: Function;
   name: string;
   errors?: { [x: string]: any };
+  setValue: Function;
 }
 
 const Multiselect = ({
@@ -18,31 +19,33 @@ const Multiselect = ({
   name,
   errors,
   required,
+  setValue,
 }: MultiselectProps) => {
-  const [marketFilter, setMarketFilter] = useState<string[]>([]);
-  const [selectValue, setSelectValue] = useState<string[]>([]);
+  const [filter, setFilter] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [currentValue, setCurrentValue] = useState(placeholder);
 
   const handleToggle = (item: string) => {
-    const currentIndex = marketFilter.indexOf(item);
-    const newFilters = [...marketFilter];
+    const currentIndex = filter.indexOf(item);
+    const newFilters = [...filter];
 
     if (currentIndex === -1) {
       newFilters.push(item);
     } else {
       newFilters.splice(currentIndex, 1);
     }
-    setMarketFilter(newFilters);
+    setFilter(newFilters);
   };
 
   return (
     <div className='multiselect'>
       <input
         className={`multiselect__inner ${
-          errors && errors[name] ? '--error' : ''
+          errors && errors[name] && currentValue === placeholder
+            ? '--error'
+            : ''
         }`}
         placeholder={placeholder}
-        defaultValue={selectValue}
         readOnly
         onClick={() => setIsOpen(!isOpen)}
         {...register(name, {
@@ -66,7 +69,8 @@ const Multiselect = ({
           onClick={(event) => {
             event.preventDefault();
             setIsOpen(false);
-            setSelectValue(marketFilter);
+            setValue(name, filter);
+            setCurrentValue(setValue(name, filter));
           }}
         >
           <Button className='multiselect__button'>Применить</Button>

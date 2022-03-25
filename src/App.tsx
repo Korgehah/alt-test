@@ -34,7 +34,10 @@ const Form = ({
   errors,
   setValue,
 }: FormProps) => {
-  const onSubmit = (data: string[]) => {
+  const onSubmit = (data: any) => {
+    // const dataToSend = {
+    //   ...data, user_country:
+    // };
     console.log(data);
   };
 
