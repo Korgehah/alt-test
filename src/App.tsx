@@ -87,7 +87,11 @@ const Form = ({
         });
     };
 
-    sendForm();
+    if (flag) {
+      setFlag(false);
+      sendForm();
+      setTimeout(() => setFlag(true), 4000);
+    }
   };
 
   return (
