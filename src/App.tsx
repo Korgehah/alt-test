@@ -21,6 +21,7 @@ interface FormProps {
   register: Function;
   handleSubmit: Function;
   errors: { [x: string]: any };
+  setValue: Function;
 }
 
 const Form = ({
@@ -31,6 +32,7 @@ const Form = ({
   register,
   handleSubmit,
   errors,
+  setValue,
 }: FormProps) => {
   const onSubmit = (data: string[]) => {
     console.log(data);
@@ -59,6 +61,7 @@ const Form = ({
               required
               name='user_category'
               errors={errors}
+              setValue={setValue}
             />
             <Select
               placeholder='Страна*'
@@ -67,6 +70,7 @@ const Form = ({
               required
               name='user_country'
               errors={errors}
+              setValue={setValue}
             />
           </div>
         </div>
@@ -101,6 +105,7 @@ const Form = ({
               required
               name='gender'
               errors={errors}
+              setValue={setValue}
             />
             <Select
               placeholder='Предпочтительный язык*'
@@ -109,6 +114,7 @@ const Form = ({
               required
               name='lang'
               errors={errors}
+              setValue={setValue}
             />
             <Input
               placeholder='Должность*'
@@ -139,6 +145,7 @@ const Form = ({
             register={register}
             errors={errors}
             name='country'
+            setValue={setValue}
           />
           <Multiselect
             placeholder='Интересующие отрасли*'
@@ -147,6 +154,7 @@ const Form = ({
             register={register}
             errors={errors}
             name='industry'
+            setValue={setValue}
           />
           <Input
             placeholder='Сообщение'
@@ -189,6 +197,7 @@ const App = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     mode: 'onChange',
   });
@@ -246,6 +255,7 @@ const App = () => {
             register={register}
             handleSubmit={handleSubmit}
             errors={errors}
+            setValue={setValue}
           />
         </div>
       </main>

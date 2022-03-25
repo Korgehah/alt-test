@@ -7,6 +7,7 @@ interface SelectProps {
   required?: boolean;
   name: string;
   errors?: { [x: string]: any };
+  setValue: Function;
 }
 
 const Select = ({
@@ -15,15 +16,19 @@ const Select = ({
   register,
   required,
   name,
+  setValue,
   errors,
 }: SelectProps) => {
-  const [selectValue, setSelectValue] = useState('');
+  const [currentValue, setCurrentValue] = useState(placeholder);
   return (
     <div className='select'>
       <input
-        className={`select__inner ${errors && errors[name] ? '--error' : ''}`}
+        className={`select__inner ${
+          errors && errors[name] && currentValue === placeholder
+            ? '--error'
+            : ''
+        }`}
         placeholder={placeholder}
-        value={selectValue}
         readOnly
         {...register(name, {
           required: required,
@@ -31,13 +36,16 @@ const Select = ({
       />
       <div className='select__menu'>
         {selectItems?.map((item) => (
-          <span
+          <div
             className='select__option'
             key={item.id}
-            onClick={() => setSelectValue(item.name)}
+            onClick={() => {
+              setValue(name, item.name);
+              setCurrentValue(item.name);
+            }}
           >
             {item.name}
-          </span>
+          </div>
         ))}
       </div>
     </div>
