@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 import { Button } from '../Button';
 import { Checkbox } from '../Checkbox';
 
@@ -24,6 +25,8 @@ const Multiselect = ({
   const [filter, setFilter] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [currentValue, setCurrentValue] = useState(placeholder);
+  const ref = useRef<HTMLHeadingElement>(null);
+  useOnClickOutside(ref, () => setIsOpen(false));
 
   const handleToggle = (item: string) => {
     const currentIndex = filter.indexOf(item);
@@ -38,7 +41,7 @@ const Multiselect = ({
   };
 
   return (
-    <div className='multiselect'>
+    <div className='multiselect ' ref={ref}>
       <input
         className={`multiselect__inner ${
           errors && errors[name] && currentValue === placeholder
@@ -69,8 +72,7 @@ const Multiselect = ({
           onClick={(event) => {
             event.preventDefault();
             setIsOpen(false);
-            setValue(name, filter);
-            setCurrentValue(setValue(name, filter));
+            setCurrentValue(setValue(name, filter.join(', ')));
           }}
         >
           <Button className='multiselect__button'>Применить</Button>
