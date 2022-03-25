@@ -1,0 +1,47 @@
+.footer {
+  padding: 20px 0;
+
+  &__wrapper {
+    align-items: center;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  &__rules {
+    margin: 0 0 10px;
+  }
+
+  &__logo {
+    margin-left: 37px;
+  }
+
+  &__link {
+    color: #0071b8;
+    text-decoration: underline;
+  }
+
+  &__socials {
+    display: flex;
+    margin-left: auto;
+  }
+
+  &__social {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #f4f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}

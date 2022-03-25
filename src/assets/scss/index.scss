@@ -1,8 +1,5 @@
-/* variables */
-@import './core/variables';
 /* components */
 @import './components/index';
-
 /* fonts */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap');
 
@@ -25,51 +22,6 @@ a {
   display: flex;
   margin: 0 auto;
   justify-content: space-between;
-}
-
-.header {
-  padding: 18px 0;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    background-color: #f4f4f6;
-  }
-
-  &__menu {
-    display: flex;
-  }
-
-  &__button {
-    display: flex;
-    font-size: 14px;
-    font-weight: 600;
-    color: #0071b8;
-    padding: 10px;
-
-    &-icon {
-      margin-left: 4px;
-    }
-  }
-
-  &__switcher {
-    display: flex;
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 600;
-    padding: 10px;
-    align-items: center;
-
-    &-flag {
-      margin-right: 4px;
-    }
-    &-arrow {
-      margin-left: 1px;
-    }
-  }
 }
 
 .main {
@@ -143,5 +95,52 @@ a {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 20px;
+  }
+
+  &__button {
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    padding: 0 32px;
+
+    &-section {
+      position: relative;
+      font-size: 12px;
+      display: flex;
+      margin: 81px 0 0;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -50px;
+        left: -45px;
+        width: calc(100% + 90px);
+        height: 1px;
+        background-color: #f4f4f6;
+      }
+    }
+
+    &-container {
+      background-color: #0071b8;
+      border-radius: 5px;
+      width: 240px;
+      height: 55px;
+      padding: 0;
+      transition: background-color 0.3s ease-in-out;
+
+      &.--disabled {
+        background-color: #74767a;
+        color: #ffffff;
+        cursor: default;
+
+        &:hover {
+          background-color: #74767a;
+        }
+      }
+
+      &:hover {
+        background-color: #338dc6;
+      }
+    }
   }
 }

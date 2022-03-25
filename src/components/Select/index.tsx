@@ -1,17 +1,52 @@
+import { useState } from 'react';
+
 interface SelectProps {
   placeholder: string;
+  selectItems?: { id: string; name: string }[];
+  register: Function;
+  required?: boolean;
+  name: string;
+  errors?: { [x: string]: any };
+  setValue: Function;
 }
 
-const Select = ({ placeholder }: SelectProps) => {
+const Select = ({
+  placeholder,
+  selectItems,
+  register,
+  required,
+  name,
+  setValue,
+  errors,
+}: SelectProps) => {
+  const [currentValue, setCurrentValue] = useState(placeholder);
   return (
     <div className='select'>
-      <input className='select__inner' placeholder={placeholder} />
+      <input
+        className={`select__inner ${
+          errors && errors[name] && currentValue === placeholder
+            ? '--error'
+            : ''
+        }`}
+        placeholder={placeholder}
+        readOnly
+        {...register(name, {
+          required: required,
+        })}
+      />
       <div className='select__menu'>
-        <span className='select__option'>1</span>
-        <span className='select__option'>2</span>
-        <span className='select__option'>3</span>
-        <span className='select__option'>4</span>
-        <span className='select__option'>5</span>
+        {selectItems?.map((item) => (
+          <div
+            className='select__option'
+            key={item.id}
+            onClick={() => {
+              setValue(name, item.name);
+              setCurrentValue(item.name);
+            }}
+          >
+            {item.name}
+          </div>
+        ))}
       </div>
     </div>
   );
