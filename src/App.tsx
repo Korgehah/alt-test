@@ -14,6 +14,8 @@ import { useForm } from 'react-hook-form';
 import { Footer } from './components/Footer';
 import { Textarea } from './components/Textarea';
 
+const url = 'https://export.alt-test.ru';
+
 interface FormProps {
   categories: { id: string; name: string }[];
   countries: { id: string; name: string }[];
@@ -38,10 +40,49 @@ const Form = ({
   const [isDisabled, setIsDisabled] = useState<boolean[]>([false, false]);
 
   const onSubmit = (data: any) => {
-    // const dataToSend = {
-    //   ...data, user_country:
-    // };
-    console.log(data);
+    const getCodes = (
+      array: { name: string; id: string }[],
+      codesFor: string | string[],
+      arrayWithCodes: string[]
+    ) => {
+      array.filter((item) => {
+        if (codesFor.includes(item.name)) {
+          arrayWithCodes.push(item.id);
+        }
+      });
+    };
+
+    const countryCodes: string[] = [];
+    const industryCodes: string[] = [];
+    const userCountryCodes: string[] = [];
+    const userCategoryCodes: string[] = [];
+    const langCodes: string[] = [];
+    const genderCodes: string[] = [];
+
+    getCodes(countries, data.country, countryCodes);
+    getCodes(industries, data.industry, industryCodes);
+    getCodes(categories, data.userCategory, userCategoryCodes);
+    getCodes(countries, data.userCountry, userCountryCodes);
+    getCodes(languages, data.lang, langCodes);
+
+    const dataToSend = { ...data };
+    dataToSend.country = countryCodes;
+    dataToSend.industry = industryCodes;
+    dataToSend.userCategory = userCategoryCodes.join();
+    dataToSend.userCountry = userCountryCodes.join();
+    dataToSend.lang = langCodes.join();
+
+    console.log(dataToSend);
+
+    const sendForm = () => {
+      axios
+        .post(`${url}/api/v1/public/auth/registration_demo`, dataToSend)
+        .catch((error) => {
+          console.log(error.response);
+        });
+    };
+
+    sendForm();
   };
 
   return (
@@ -55,7 +96,7 @@ const Form = ({
             register={register}
             errors={errors}
             required
-            name='company_name'
+            name='companyName'
             validationType='company'
             errorText='Введите имя компании'
           />
@@ -65,7 +106,7 @@ const Form = ({
               selectItems={categories}
               register={register}
               required
-              name='user_category'
+              name='userCategory'
               errors={errors}
               setValue={setValue}
             />
@@ -74,7 +115,7 @@ const Form = ({
               selectItems={countries}
               register={register}
               required
-              name='user_country'
+              name='userCountry'
               errors={errors}
               setValue={setValue}
             />
@@ -220,8 +261,6 @@ const App = () => {
   } = useForm({
     mode: 'onChange',
   });
-
-  const url = 'https://export.alt-test.ru';
 
   const getAllCategories = () => {
     axios
