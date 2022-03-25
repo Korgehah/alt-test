@@ -1,0 +1,43 @@
+.error {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ca0f0f;
+  width: 800px;
+  padding: 15px 30px;
+  border-radius: 20px;
+  color: #ffffff;
+  z-index: 10;
+  animation: move 3.5s ease-in-out forwards;
+
+  &__img {
+    margin-right: 15px;
+  }
+
+  &__close {
+    margin-left: auto;
+    font-size: 21px;
+    line-height: 21px;
+    cursor: pointer;
+    align-self: flex-start;
+    padding: 5px;
+  }
+}
+
+@keyframes move {
+  0% {
+    top: -100px;
+  }
+  10% {
+    top: 40px;
+  }
+  90% {
+    top: 40px;
+  }
+  100% {
+    top: -100px;
+  }
+}

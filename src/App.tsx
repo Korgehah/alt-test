@@ -13,6 +13,7 @@ import { Multiselect } from './components/Multiselect';
 import { useForm } from 'react-hook-form';
 import { Footer } from './components/Footer';
 import { Textarea } from './components/Textarea';
+import { Error } from './components/Error';
 
 const url = 'https://export.alt-test.ru';
 
@@ -25,6 +26,7 @@ interface FormProps {
   handleSubmit: Function;
   errors: { [x: string]: any };
   setValue: Function;
+  setError: Function;
 }
 
 const Form = ({
@@ -36,8 +38,10 @@ const Form = ({
   handleSubmit,
   errors,
   setValue,
+  setError,
 }: FormProps) => {
   const [isDisabled, setIsDisabled] = useState<boolean[]>([false, false]);
+  const [flag, setFlag] = useState(true);
 
   const onSubmit = (data: any) => {
     const getCodes = (
@@ -77,8 +81,9 @@ const Form = ({
     const sendForm = () => {
       axios
         .post(`${url}/api/v1/public/auth/registration_demo`, dataToSend)
+        .then((response) => console.log(response))
         .catch((error) => {
-          console.log(error.response);
+          setError(error.message);
         });
     };
 
@@ -252,6 +257,7 @@ const App = () => {
   const [countries, setCountries] = useState<[]>([]);
   const [languages, setLanguages] = useState<[]>([]);
   const [industries, setIndustries] = useState<[]>([]);
+  const [error, setError] = useState('');
 
   const {
     register,
@@ -297,6 +303,7 @@ const App = () => {
 
   return (
     <div className='layout'>
+      <Error error={error} setError={setError}></Error>
       <Header />
       <main className='main'>
         <div className='wrapper main__wrapper'>
@@ -314,6 +321,7 @@ const App = () => {
             handleSubmit={handleSubmit}
             errors={errors}
             setValue={setValue}
+            setError={setError}
           />
         </div>
       </main>
